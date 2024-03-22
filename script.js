@@ -2,8 +2,15 @@ document.getElementById('generationForm').addEventListener('submit', function(ev
     event.preventDefault();
     const birthYear = parseInt(document.getElementById('birthYear').value);
     const generation = identifyGeneration(birthYear);
-    document.getElementById('result').innerText = `You belong to the ${generation} generation.`;
+    const resultElement = document.getElementById('result');
+    resultElement.innerText = `You belong to the ${generation} generation.`;
+    resultElement.classList.add('bounce-out'); // Apply bounce-in animation
+
+     // Create firecracker elements
+     createFirecrackers(resultElement);
+    
 });
+
 
 function identifyGeneration(birthYear) {
     if (birthYear >= 1946 && birthYear <= 1964) {
@@ -16,5 +23,15 @@ function identifyGeneration(birthYear) {
         return "Generation Z";
     } else {
         return "Generation Unknown";
+    }
+}
+
+
+function createFirecrackers(container) {
+    const numFirecrackers = 3; // Number of firecrackers to create
+    for (let i = 0; i < numFirecrackers; i++) {
+        const firecracker = document.createElement('div');
+        firecracker.classList.add('firecracker');
+        container.appendChild(firecracker);
     }
 }
